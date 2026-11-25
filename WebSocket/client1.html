@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.IO Client</title>
+</head>
+
+<body>
+
+    <h1>Socket.IO Client</h1>
+    <input type="text" id="message" placeholder="Enter Message">
+    <button id="sendBtn">Send</button>
+
+    <!-- loading the socket into client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io()
+        messageInput = document.getElementById("message")
+        sendBtn = document.getElementById("sendBtn")
+
+        // recieving messages
+        socket.on("message", message =>{
+            console.log(message)
+        })
+
+        sendBtn.addEventListener('click', e =>{
+            const message = messageInput.value
+            console.log(message)
+            // now send message to server
+            socket.emit("user-message", message)
+        })
+    </script>
+
+</body>
+
+</html>
